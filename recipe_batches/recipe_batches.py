@@ -4,25 +4,21 @@ import math
 
 
 def recipe_batches(recipe, ingredients):
-    # For ingredient in the recipe:
-    counter = 0
-    while True:
-        for key in recipe.keys():
-            print('recipe count', key, recipe[key])
-            # if we need more than we have:
-            if key not in ingredients.keys() or recipe[key] > ingredients[key]:
-                # return the counter
-                break
-            # if we have more than we need:
-            else:
-                print('ingredients count', key, ingredients[key])
-                # subtract the needed amount from ingredients
-                ingredients[key] -= recipe[key]
-    # add one to the counter
-        counter += 1
-    # repeat the loop
-    return counter
-    # return the counter
+    # set batch count to inf
+    batches = float('inf')
+    # for key in recipe dict keys:
+    for key in recipe.keys():
+        # if the key is in the ingredients dict and the value is not higher than in ingredients:
+        if key in ingredients.keys() and ingredients[key] >= recipe[key]:
+            # floor divide ingredients value by recipe value
+            temp = ingredients[key] // recipe[key]
+            # if its smaller than batch count, replace batch count
+            if temp < batches:
+                batches = temp
+        else:
+            batches = 0
+            break
+    return batches
 
 
 if __name__ == '__main__':
