@@ -8,16 +8,19 @@ import sys
 # recursive solution
 def eating_cookies(n, cache=None):
     if not cache:
-        cache = {0: 1, 1: 1, 2: 2}
+        cache = [0 for _ in range(n+1)]
     # base case - 0 cookies
     if n == 0:
+        cache[0] = 1
         return cache[0]
     elif n == 1:
+        cache[1] = 1
         return cache[1]
     # base case - 1 cookie
     elif n == 2:
+        cache[2] = 2
         return cache[2]
-    if n not in cache:
+    if cache[n] == 0:
         cache[n] = eating_cookies(n-1, cache) + eating_cookies(n-2, cache) + eating_cookies(n-3, cache)
     return cache[n]
 
